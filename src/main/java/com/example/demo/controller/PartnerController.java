@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/partner")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class PartnerController {
 
     private final PartnerServiceImpl partnerService ;
@@ -21,9 +22,9 @@ public class PartnerController {
        return partnerService.addPartner(partner);
    }
    @DeleteMapping("/deletePartner/{idPartner}")
-    public ResponseEntity<?> deletePartner(@PathVariable("idPartner") Integer idPartner){
+    public void deletePartner(@PathVariable("idPartner") Integer idPartner){
         partnerService.deletePartner(idPartner);
-        return ResponseEntity.ok("partenaire supprimer avec suces");
+
     }
     @PutMapping("/updatePartner/{idPartner}")
     public ResponseEntity<?> updatePartner(@PathVariable("idPartner") Integer idPartner,@RequestBody Partner partner){

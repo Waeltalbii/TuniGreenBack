@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class Partner implements Serializable {
     private Integer id ;
     private String namePartner ;
     private String descriptionPartner ;
+    @JsonIgnore
     @OneToMany(mappedBy = "partner",cascade = CascadeType.ALL)
     private List<Offer> offers ;
 }

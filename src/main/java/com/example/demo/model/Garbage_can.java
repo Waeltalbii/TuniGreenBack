@@ -18,9 +18,11 @@ public class Garbage_can implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
+    private String reference;
     private String latitude ;
     private String longitude ;
     private String street ;
     private String city ;
     private String country ;
+    private String full_address;
 }

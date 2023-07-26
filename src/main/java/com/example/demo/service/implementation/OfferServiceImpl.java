@@ -8,6 +8,10 @@ import com.example.demo.model.Offer;
 import com.example.demo.model.Partner;
 import com.example.demo.service.interfaces.OfferService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Paths;
@@ -40,7 +44,9 @@ public class OfferServiceImpl implements OfferService {
             byte[] pictureBytes = picture.getBytes();
             Path picturePath = Paths.get(uploadDirectory + picture.getOriginalFilename());
             Files.write(picturePath, pictureBytes);
-            offer.setPictureUrl(picturePath.toString());
+          // offer.setPictureUrl(picturePath.toString());
+            offer.setPictureUrl(picture.getOriginalFilename());
+
         }
         return offerDAO.save(offer);
     }
@@ -90,5 +96,16 @@ public class OfferServiceImpl implements OfferService {
            offerDAO.save(offer);
         }
         else System.out.println("votre points n'ont pas suffisant");
+    }
+
+    @Override
+    public ResponseEntity<?> getImageOfferByIdOffer(Integer idOffer) throws IOException {
+        Offer offer =offerDAO.findById(idOffer).get();
+       String namePic= offer.getPictureUrl();
+        Path imagePath = Paths.get(uploadDirectory + namePic);
+        byte[] imageBytes = Files.readAllBytes(imagePath);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
     }
 }

@@ -8,6 +8,7 @@ import com.example.demo.config.JwtService;
 import com.example.demo.model.Appuser;
 import com.example.demo.model.Role;
 
+import com.example.demo.model.Status;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -29,10 +30,14 @@ public class UserImpl {
     public void signup(RegisterRequest request){
      var user = Appuser.builder()
              .firstname(request.getFirstname())
-             .lasttname(request.getLastname())
+             .lastname(request.getLastname())
              .email((request.getEmail()))
              .password(passwordEncoder.encode(request.getPassword()))
              .role(Role.User)
+             .status(Status.Beginner)
+             .picture(request.getPicture())
+             .phone(request.getPhone())
+
              .build();
      userDAO.save(user);
      /*

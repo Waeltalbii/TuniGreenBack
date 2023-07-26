@@ -23,9 +23,15 @@ public class Appuser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
     private String firstname ;
-    private String lasttname ;
+    private String lastname ;
     private String password ;
+    private String phone ;
     private String email ;
+    @Column(length = 5000000)
+    private String picture ;
+    private String description ;
+    @Enumerated(EnumType.STRING)
+    private Status status ;
     @Enumerated(EnumType.STRING)
     private Role role ;
     private Integer pointsOfUser ;

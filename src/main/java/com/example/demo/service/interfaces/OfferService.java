@@ -1,6 +1,7 @@
 package com.example.demo.service.interfaces;
 
 import com.example.demo.model.Offer;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,5 +17,5 @@ public interface OfferService {
     List<Offer> getAllOffer();
     List<Offer> getOfferByPartner(String namePartner);
     void addOfferToUser(Integer idUser,Integer idOffer);
-
+    ResponseEntity<?> getImageOfferByIdOffer(Integer idOffer) throws IOException;
 }
